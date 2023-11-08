@@ -7,9 +7,13 @@ let id = 0;
 
 const addButton = document.getElementById(ADD_BTN_ID);
 
+const clearUrlInput = () => {
+    document.getElementById("url-input").value = "";
+}
+
 addButton.addEventListener('click', _ => {
     const url = document.getElementById("url-input").value;
-    if (id >= 6) {
+    if (id >= 6 || !url) {
         return;
     }
     if (addButton.classList.contains(HIDE_ADD_BTN_CSS)) {
@@ -28,6 +32,7 @@ addButton.addEventListener('click', _ => {
         addButton.classList.add(HIDE_ADD_BTN_CSS);
         return;
     }
+    clearUrlInput();
 });
 
 const petContainer = document.getElementById("mascotas-container");
@@ -47,16 +52,6 @@ petContainer.addEventListener('click', e => {
 const removeBtn = document.getElementById("remove-btn");
 
 removeBtn.addEventListener('click', e => {
-    const petList = document.getElementsByClassName("pet");
-    const url = document.getElementById("url-input").value;
-    console.log(url);
-    for (pet of petList) {
-        console.log(pet)
-        if (pet.src === url) {
-            $(pet.id).remove();
-        }
-    }
-    if (id <= 6 && addButton.classList.contains(HIDE_ADD_BTN_CSS)) {
-        addButton.classList.remove(HIDE_ADD_BTN_CSS);
-    }
+    clearUrlInput();
 });
+
